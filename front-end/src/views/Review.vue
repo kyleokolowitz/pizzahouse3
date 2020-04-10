@@ -132,7 +132,7 @@ export default {
          let response2 = await axios.get('/api/items/' + this.$cookies.get("orderID"));
          this.items = response2.data;
       } catch (error) {
-         console.log(error);
+         //console.log(error);
          this.items = [];
       }
    },

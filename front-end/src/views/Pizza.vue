@@ -82,7 +82,7 @@ export default {
             this.addItem = r1.data;
             this.$router.push('/order');
          } catch (error) {
-            console.log(error);
+            //console.log(error);
          }
       },
    }

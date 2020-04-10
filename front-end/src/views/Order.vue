@@ -103,7 +103,7 @@ export default {
          let response2 = await axios.get('/api/items/' + this.$cookies.get("orderID"));
          this.items = response2.data;
       } catch (error) {
-         console.log(error);
+         //console.log(error);
          this.items = [];
       }
    },
@@ -146,7 +146,7 @@ export default {
             let response = await axios.get('/api/items/' + this.$cookies.get("orderID"));
             this.items = response.data;
          } catch (error) {
-            console.log(error);
+            //console.log(error);
          }
       },
       async remove(item) {
@@ -156,7 +156,7 @@ export default {
             this.items = response.data;
             this.reloadNavbar();
          } catch (error) {
-            console.log(error);
+            //console.log(error);
          }
       },
       async updateDelivery() {
@@ -165,7 +165,7 @@ export default {
                delivery: this.delivery,
             });
          } catch (error) {
-            console.log(error);
+            //console.log(error);
          }
       },
       async updateTotals() {
@@ -177,7 +177,7 @@ export default {
             });
             this.$router.push('/payment');
          } catch (error) {
-            console.log(error);
+            //console.log(error);
          }
       },
       reloadNavbar() {

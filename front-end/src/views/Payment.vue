@@ -112,7 +112,7 @@ export default {
                expDate: this.expDate,
             });
          } catch (error) {
-            console.log(error);
+            //console.log(error);
          }
       },
       con() {
