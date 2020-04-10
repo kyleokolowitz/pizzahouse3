@@ -28,10 +28,10 @@
 
       <div class="box create-box">
          <br>
-         <h3>${{sizes[selected].price}}</h3>
+         <h3>${{sizes[selectedSize].price}}</h3>
          <br>
          Size:
-         <select v-model="selected">
+         <select v-model="selectedSize">
             <option v-for="size in sizes" :key="size.id" v-bind:value="size.id">
                {{ size.size }}
             </option>
@@ -39,8 +39,7 @@
 
          <br><br>
          <strong>Crust:</strong>
-         <select name="crust">
-
+         <select v-model="selectedCrust">
             <option value="Thin">Thin</option>
             <option value="Regular" selected>Regular</option>
             <option value="Thick">Thick</option>
@@ -54,7 +53,7 @@
                <input type="checkbox" name="Pepperoni" value="Pepperoni" v-model="pepperoniChecked"> Pepperoni<br>
                <input type="checkbox" name="Sausage" value="Sausage" v-model="sausageChecked"> Sausage<br>
                <input type="checkbox" name="Mushroom" value="Mushroom" v-model="mushroomChecked"> Mushroom<br>
-               <input type="checkbox" name="Jalapenos" value="Jalapenos" v-model="jalapenoChecked"> Jalapenos<br>
+               <input type="checkbox" name="Jalapenos" value="Jalapenos" v-model="jalapenoChecked"> Jalapeños<br>
             </div>
 
             <div>
@@ -68,7 +67,7 @@
 
          <br><br>
          <center>
-            <button class="order-button button">Add to Order</button>
+            <button class="order-button button" @click="addToOrder">Add to Order</button>
          </center>
 
       </div>
@@ -79,6 +78,10 @@
 
 <script>
 import Navbar from "../components/Navbar.vue"
+import axios from "axios";
+import {
+   v4 as uuid
+} from 'uuid';
 export default {
    name: 'Build',
    components: {
@@ -87,7 +90,8 @@ export default {
    data() {
       return {
          id: this.$route.params.id,
-         selected: 2,
+         selectedSize: 2,
+         selectedCrust: "Regular",
          cheeseChecked: false,
          pepperoniChecked: false,
          sausageChecked: false,
@@ -103,8 +107,44 @@ export default {
    computed: {
       sizes() {
          return this.$root.$data.sizes;
+      },
+      description() {
+         let str = "This build your own pizza comes with a " + this.selectedCrust.toLowerCase() + " crust, cheese";
+         if (this.cheeseChecked) str += ", extra cheese";
+         if (this.pepperoniChecked) str += ", pepperoni";
+         if (this.sausageChecked) str += ", sausage";
+         if (this.mushroomChecked) str += ", mushrooms";
+         if (this.jalapenoChecked) str += ", jalapeños";
+         if (this.oliveChecked) str += ", olives";
+         if (this.onionChecked) str += ", onions";
+         if (this.spinachChecked) str += ", spinach";
+         if (this.pineappleChecked) str += ", pineapple";
+         if (this.hamChecked) str += ", ham";
+         str += ".";
+         return str;
       }
    },
+   methods: {
+      async addToOrder() {
+         if (!this.$cookies.isKey("orderID")) {
+            this.$cookies.set("orderID", uuid());
+         }
+         try {
+            let r1 = await axios.post('/api/items', {
+               itemID: uuid(),
+               orderID: this.$cookies.get("orderID"),
+               pizzaType: 0,
+               description: this.description,
+               size: this.selectedSize,
+               quantity: 1
+            });
+            this.addItem = r1.data;
+            this.$router.push('/order');
+         } catch (error) {
+            console.log(error);
+         }
+      },
+   }
 }
 </script>
 

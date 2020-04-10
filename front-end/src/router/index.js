@@ -5,6 +5,10 @@ import Menu from '../views/Menu.vue'
 import Pizza from '../views/Pizza.vue'
 import Build from '../views/Build.vue'
 import Learn from '../views/Learn.vue'
+import Order from '../views/Order.vue'
+import Payment from '../views/Payment.vue'
+import Review from '../views/Review.vue'
+import ThankYou from '../views/ThankYou.vue'
 
 Vue.use(VueRouter)
 
@@ -40,7 +44,27 @@ const routes = [{
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
-   }
+   },
+   {
+      path: '/order',
+      name: 'Order',
+      component: Order
+   },
+   {
+      path: '/payment',
+      name: 'Payment',
+      component: Payment
+   },
+   {
+      path: '/review',
+      name: 'Review',
+      component: Review
+   },
+   {
+      path: '/thankyou',
+      name: 'ThankYou',
+      component: ThankYou
+   },
 ]
 
 const router = new VueRouter({

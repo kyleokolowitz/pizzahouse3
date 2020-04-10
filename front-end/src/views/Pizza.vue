@@ -18,13 +18,13 @@
 
       <div class="box word-box">
          <br>
-         <h3>${{sizes[selected].price}}</h3>
+         <h3>${{sizes[selectedSize].price}}</h3>
          <br>
          <p>{{pizzas[id].description}}</p>
          <br>
 
          Size:
-         <select v-model="selected">
+         <select v-model="selectedSize">
             <option v-for="size in sizes" :key="size.id" v-bind:value="size.id">
                {{ size.size }}
             </option>
@@ -32,7 +32,7 @@
          <br><br><br>
 
          <center>
-            <button class=" order-button button">Add to Order</button>
+            <button class="order-button button" @click="addToOrder">Add to Order</button>
          </center>
       </div>
    </section>
@@ -40,7 +40,11 @@
 </template>
 
 <script>
-import Navbar from "../components/Navbar.vue"
+import Navbar from "../components/Navbar.vue";
+import axios from "axios";
+import {
+   v4 as uuid
+} from 'uuid';
 export default {
    name: 'Pizza',
    components: {
@@ -49,7 +53,8 @@ export default {
    data() {
       return {
          id: this.$route.params.id,
-         selected: 2,
+         selectedSize: 2,
+         addItem: null,
       }
    },
    computed: {
@@ -60,6 +65,27 @@ export default {
          return this.$root.$data.sizes;
       }
    },
+   methods: {
+      async addToOrder() {
+         if (!this.$cookies.isKey("orderID")) {
+            this.$cookies.set("orderID", uuid());
+         }
+         try {
+            let r1 = await axios.post('/api/items', {
+               itemID: uuid(),
+               orderID: this.$cookies.get("orderID"),
+               pizzaType: this.id,
+               description: this.pizzas[this.id].description,
+               size: this.selectedSize,
+               quantity: 1
+            });
+            this.addItem = r1.data;
+            this.$router.push('/order');
+         } catch (error) {
+            console.log(error);
+         }
+      },
+   }
 }
 </script>
 
@@ -72,7 +98,7 @@ export default {
 }
 
 .order-button {
-   background-color: green;
+   background-color: #70DA65;
    border-radius: 15px;
    width: 150px;
    height: 40px;

@@ -34,7 +34,11 @@ export default {
    },
    computed: {
       pizzas() {
-         return this.$root.$data.pizzas;
+         let newPizzas = [];
+         for (let i = 1; i < this.$root.$data.pizzas.length; i++) {
+            newPizzas.push(this.$root.$data.pizzas[i]);
+         }
+         return newPizzas;
       }
    },
 }

@@ -1,12 +1,11 @@
 <template>
 <div>
 
-
    <div id="page-container">
       <div id="content-wrap">
          <router-view />
-
       </div>
+
       <footer id="footer">
          <br>
          <center>
@@ -28,7 +27,7 @@
                   <a class="footer-link" href="">About</a>
                </router-link>
             </p>
-            <p id="source-code-link">Find source code <a href="https://github.com/kyleokolowitz/pizzahouse2">here.</a></p>
+            <p id="source-code-link">Find source code <a href="https://github.com/kyleokolowitz/pizzahouse3">here.</a></p>
          </center>
       </footer>
    </div>

@@ -1,13 +1,20 @@
 let mock = {
    pizzas: [{
          id: 0,
+         name: "Build Your Own",
+         img: "build.jpg",
+         description: "Build your own pizza",
+         toppings: []
+      },
+      {
+         id: 1,
          name: "Classic Cheese",
          img: "cheese.jpg",
          description: "This specialty pizza comes with our famous red tomato sauce and lots of creamy cheese like no other.",
          toppings: ["cheese"]
       },
       {
-         id: 1,
+         id: 2,
          name: "Poppin Pepperoni",
          img: "pepperoni.jpg",
          description: "This specialty pizza comes with our famous red tomato sauce, lots of cheese, and pepperoni that is like no other.",
@@ -17,7 +24,7 @@ let mock = {
          ]
       },
       {
-         id: 2,
+         id: 3,
          name: "Loaded Supreme",
          img: "supreme.jpg",
          description: "This specialty pizza comes with our famous red tomato sauce, cheese, pepperoni, sausage, tomatos, olives, peppers, and onions.",
@@ -32,7 +39,7 @@ let mock = {
          ]
       },
       {
-         id: 3,
+         id: 4,
          name: "Baked BBQ",
          img: "bbq.jpg",
          description: "This specialty pizza comes with our famous bbq sauce, lots of cheese, chicken, and onions.",
@@ -44,7 +51,7 @@ let mock = {
          ]
       },
       {
-         id: 4,
+         id: 5,
          name: "Cheesey Sausage",
          img: "sausage.jpg",
          description: "This specialty pizza comes with our famous red tomato sauce, extra cheese, sausage, and bacon.",
@@ -59,22 +66,22 @@ let mock = {
    sizes: [{
          id: 0,
          size: "Small 8\"",
-         price: 8.00
+         price: 6.00
       },
       {
          id: 1,
          size: "Medium 12\"",
-         price: 12.00
+         price: 10.00
       },
       {
          id: 2,
          size: "Large 16\"",
-         price: 16.00
+         price: 14.00
       },
       {
          id: 3,
          size: "Extra Large 20\"",
-         price: 20.00
+         price: 18.00
       }
    ]
 }
